@@ -1,0 +1,18 @@
+.App {
+  /* display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* .card {
+  width: 10rem;
+  height: 10rem;
+  background-color: black;
+  margin: 2rem;
+} */
