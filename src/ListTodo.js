@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ListTodo = ({todoo, deleteTodo, dispatch}) => {
+const ListTodo = ({todoo, deleteTodo, dispatch, handleEditButton}) => {
   return (
     <div>
       <h1>
@@ -10,7 +10,7 @@ const ListTodo = ({todoo, deleteTodo, dispatch}) => {
         <button onClick={() => dispatch(deleteTodo(todoo.id))}>
           Delete
         </button>
-        <button>
+        <button onClick={() => handleEditButton(todoo)}>
           Edit
         </button>
       </div>

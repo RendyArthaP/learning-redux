@@ -7,7 +7,10 @@ import {
   POST_TODO_ERROR,
   DELETE_TODO_REQUEST,
   DELETE_TODO_SUCCESS,
-  DELETE_TODO_ERROR
+  DELETE_TODO_ERROR,
+  UPDATE_TODO_ERROR,
+  UPDATE_TODO_REQUEST,
+  UPDATE_TODO_SUCCESS
 } from '../../redux/actions/todo.actions.js';
 
 const initialState = {
@@ -80,6 +83,21 @@ const handleTodo = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isError: true
+      }
+    case UPDATE_TODO_REQUEST: 
+      return {
+        ...state,
+        isLoading: true,
+        isError: false
+      }
+    case UPDATE_TODO_SUCCESS: 
+      let updateTodo = state.data.find(todos => todos.id === action.result.id)
+      updateTodo.todos = action.todos.data
+
+      return state
+    case UPDATE_TODO_ERROR:
+      return {
+        ...state,
       }
     default:
       return state;

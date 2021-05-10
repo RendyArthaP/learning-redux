@@ -56,6 +56,26 @@ export const postTodoError = (error) => {
   }
 }
 
+export const updateTodoRequest = () => {
+  return {
+    type: UPDATE_TODO_REQUEST
+  }
+}
+
+export const updateTodoSuccess = (result) => {
+  return {
+    type: UPDATE_TODO_SUCCESS,
+    result
+  }
+}
+
+export const updateTodoError = (error) => {
+  return {
+    type: UPDATE_TODO_ERROR,
+    error
+  }
+}
+
 export const deleteTodoRequest = () => {
   return {
     type: DELETE_TODO_REQUEST
@@ -108,5 +128,16 @@ export const deleteTodo = (id) => {
       .delete(`https://6023a95a6bf3e6001766b546.mockapi.io/todos/${id}`)
       .then((result) => dispatch(deleteTodoSuccess(result.data)))
       .catch((error) => dispatch(deleteTodoError(error)))
+  }
+}
+
+export const updateTodo = ({id, todo}) => {
+  return function(dispatch) {
+    dispatch(updateTodoRequest())
+
+    axios
+      .put(`https://6023a95a6bf3e6001766b546.mockapi.io/todos/${id}`, {todo})
+      .then((result) => dispatch(getTodo()))
+      .catch((error) => updateTodoError(error))
   }
 }
