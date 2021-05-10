@@ -1,26 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { useSelector, useDispatch} from 'react-redux';
-import { getTodo } from './redux/actions/todo.actions';
+import { getTodo, postTodo } from './redux/actions/todo.actions';
+import ListTodo from './ListTodo';
  
 function App() {
   const dispatch = useDispatch()
   const todoData = useSelector((state) => state.handleTodo.data)
   const loading = useSelector((state) => state.handleTodo.isLoading)
-  const handleButton = () => {
-
-  }
+  const [dataTodo, setDataTodo] = useState("")
 
   useEffect(() => {
     dispatch(getTodo())
   }, [dispatch])
 
+  const handleButton = (e) => {
+    e.preventDefault();
+    dispatch(postTodo(dataTodo))
+  }
+
   return (
     <div className="App">
       <div>
-        <form>
-          <input />
-          <button onClick={handleButton}>
+        <form onSubmit={handleButton}>
+          <input 
+            type="text"
+            value={dataTodo} 
+            onChange={(e) => setDataTodo(e.target.value)}
+          />
+          <button type="submit">
             Submit
           </button>
         </form>
@@ -34,17 +42,7 @@ function App() {
               {todoData.map((todoo) => {
                 return (
                   <div key={todoo.id}>
-                    <h1>
-                      {todoo.todo}
-                    </h1>
-                    <div>
-                      <button>
-                        Delete
-                      </button>
-                      <button>
-                        Edit
-                      </button>
-                    </div>
+                    <ListTodo todoo = {todoo}/>
                   </div>
                 )
               })}
