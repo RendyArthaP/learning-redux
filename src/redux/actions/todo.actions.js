@@ -56,6 +56,26 @@ export const postTodoError = (error) => {
   }
 }
 
+export const deleteTodoRequest = () => {
+  return {
+    type: DELETE_TODO_REQUEST
+  }
+}
+
+export const deleteTodoSuccess = (result) => {
+  return {
+    type: DELETE_TODO_SUCCESS,
+    result
+  }
+}
+
+export const deleteTodoError = (error) => {
+  return {
+    type: DELETE_TODO_ERROR,
+    error
+  }
+}
+
 export const getTodo = () => {
   return function(dispatch) {
     dispatch(getTodoRequest())
@@ -68,7 +88,6 @@ export const getTodo = () => {
 }
 
 export const postTodo = (dataTodo) => {
-  console.log(dataTodo)
   return function(dispatch) {
     dispatch(postTodoRequest())
 
@@ -78,5 +97,16 @@ export const postTodo = (dataTodo) => {
       })
       .then((result) => dispatch(postTodoSuccess(result.data)))
       .catch((error) => dispatch(postTodoError(error)))
+  }
+}
+
+export const deleteTodo = (id) => {
+  return function(dispatch) {
+    dispatch(deleteTodoRequest())
+
+    axios
+      .delete(`https://6023a95a6bf3e6001766b546.mockapi.io/todos/${id}`)
+      .then((result) => dispatch(deleteTodoSuccess(result.data)))
+      .catch((error) => dispatch(deleteTodoError(error)))
   }
 }

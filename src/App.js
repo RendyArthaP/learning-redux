@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import { useSelector, useDispatch} from 'react-redux';
-import { getTodo, postTodo } from './redux/actions/todo.actions';
+import { getTodo, postTodo, deleteTodo } from './redux/actions/todo.actions';
 import ListTodo from './ListTodo';
  
 function App() {
@@ -42,7 +42,11 @@ function App() {
               {todoData.map((todoo) => {
                 return (
                   <div key={todoo.id}>
-                    <ListTodo todoo = {todoo}/>
+                    <ListTodo 
+                      todoo = {todoo}
+                      deleteTodo = {deleteTodo}
+                      dispatch = {dispatch}
+                    />
                   </div>
                 )
               })}
